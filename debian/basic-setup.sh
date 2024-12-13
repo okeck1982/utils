@@ -106,5 +106,34 @@ if [ `grep -E "net\.ipv6\.conf\.all\.disable_ipv6\s*=" /etc/sysctl.conf | wc -l`
     if [ $? -gt 0 ]; then echo -e $C_ERR; else echo -e $C_OK; fi
 fi
 
+echo -n "- Clear /etc/motd ... "
+echo "" > /etc/motd
+if [ $? -gt 0 ]; then echo -e $C_ERR; else echo -e $C_OK; fi
+
+echo -n "- Remove all files in /etc/update-motd.d/ ... "
+rm /etc/update-motd.d/*
+if [ $? -gt 0 ]; then echo -e $C_ERR; else echo -e $C_OK; fi
+
+echo -n "- Set dynamic motd in /etc/update-motd.d/10-systeminfo ... "
+cat <<EOF > /etc/update-motd.d/10-systeminfo
+#!/bin/bash
+MY_IFACE=\`ip link | awk '\$0 ~ /^[0-9].*$/ && \$2 != "lo:" { gsub(":","",\$2); print \$2 }'\`
+MY_IP=\`ip addr show \${MY_IFACE} | awk '\$1 == "inet" { print(\$2) }'\`
+cat <<EOT
+
+   \`lsb_release -sd 2> /dev/null\` [\`uname -srm\`]
+   =========================================================================
+   Hostname: \`hostname --fqdn\`
+   IP:       \${MY_IP} (\${MY_IFACE})
+   Uptime:   \`uptime -p\`
+
+EOT
+EOF
+if [ $? -gt 0 ]; then echo -e $C_ERR; else echo -e $C_OK; fi
+
+echo  -n "- Enable execution of /etc/update-motd.d/10-systeminfo ... "
+chmod 755 /etc/update-motd.d/10-systeminfo
+if [ $? -gt 0 ]; then echo -e $C_ERR; else echo -e $C_OK; fi
+
 echo -n "- Reboot system."
-reboot
+#reboot
