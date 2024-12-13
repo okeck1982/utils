@@ -136,4 +136,4 @@ chmod 755 /etc/update-motd.d/10-systeminfo
 if [ $? -gt 0 ]; then echo -e $C_ERR; else echo -e $C_OK; fi
 
 echo -n "- Reboot system."
-#reboot
+reboot
