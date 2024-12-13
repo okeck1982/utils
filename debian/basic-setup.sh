@@ -11,8 +11,8 @@ INTERFACE=`ip link | awk '$0 ~ /^[0-9].*$/ && $2 != "lo:" { gsub(":","",$2); pri
 # Get informations
 read -p "Admin Username (administrator): " ADMINUSER < /dev/tty
 read -p "IP Address: " NEW_IP < /dev/tty
-read -p "Netmaks (255.255.255.0): " NEW_MASK < /dev/tty
 read -p "Gateway: " NEW_GW < /dev/tty
+read -p "Netmask (255.255.255.0): " NEW_MASK < /dev/tty
 read -p "DNS Server (10.10.100.11): " NEW_DNS < /dev/tty
 read -p "New Domain (ok.home): " NEW_DOMAIN < /dev/tty
 
