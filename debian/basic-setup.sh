@@ -31,7 +31,7 @@ echo -n "- CHECK: Gateway IP '${NEW_GW}' ... "; if [ `echo -n "${NEW_GW}" | grep
 echo -n "- CHECK: DNS Server '${NEW_DNS}' ... "; if [ `echo -n "${NEW_DNS}" | grep -E $ip_regex | wc -l` -gt 0 ]; then echo -e $C_OK; else echo -e $C_INV; exit 1; fi
 
 # Overview
-cat << 'EOF'
+cat << EOF
 ===================================================================
 Setup Details:
  - Admin user is:     ${ADMINUSER}
@@ -77,7 +77,7 @@ echo "$ADMINUSER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$ADMINUSER
 if [ $? -gt 0 ]; then echo -e $C_ERR; else echo -e $C_OK; fi
 
 echo -n "- Replace /etc/network/interfaces ..."
-cat << 'EOF' > /etc/network/interfaces
+cat << EOF > /etc/network/interfaces
 # Loopback network interface
 auto lo
 iface lo inet loopback
