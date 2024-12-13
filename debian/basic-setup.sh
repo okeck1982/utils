@@ -86,7 +86,7 @@ iface lo inet loopback
 auto ${INTERFACE}
 iface ${INTERFACE} inet static
         address ${NEW_IP}
-        netmsak ${NEW_MASK}
+        netmask ${NEW_MASK}
         gateway ${NEW_GW}
         dns-nameservers ${NEW_DNS}
         dns-domain ${NEW_DOMAIN}
@@ -105,3 +105,6 @@ if [ `grep -E "net\.ipv6\.conf\.all\.disable_ipv6\s*=" /etc/sysctl.conf | wc -l`
     echo -e "\n# Disable IPv6\nnet.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf;
     if [ $? -gt 0 ]; then echo -e $C_ERR; else echo -e $C_OK; fi
 fi
+
+echo -n "- Reboot system."
+reboot
