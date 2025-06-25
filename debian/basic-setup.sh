@@ -14,13 +14,13 @@ read -p "IP Address: " NEW_IP < /dev/tty
 read -p "Gateway: " NEW_GW < /dev/tty
 read -p "Netmask (255.255.255.0): " NEW_MASK < /dev/tty
 read -p "DNS Server (10.10.100.11): " NEW_DNS < /dev/tty
-read -p "New Domain (ok.home): " NEW_DOMAIN < /dev/tty
+read -p "New Domain (okeck.home): " NEW_DOMAIN < /dev/tty
 
 # Apply default Values
 ADMINUSER=${ADMINUSER:-administrator}
 NEW_MASK=${NEW_MASK:-255.255.255.0}
 NEW_DNS=${NEW_DNS:-10.10.100.11}
-NEW_DOMAIN=${NEW_DOMAIN:-ok.home}
+NEW_DOMAIN=${NEW_DOMAIN:-okeck.casa}
 
 # Pre Checks
 ip_regex='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
